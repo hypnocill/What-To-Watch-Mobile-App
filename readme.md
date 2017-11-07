@@ -10,7 +10,7 @@ Try the android app in the demo!
 
 ## About the project
 
-It's a personal project for fun and react-native practice.
+It's a personal project for fun and react-native and redux practice.
 
 The app is android only.
 
@@ -33,3 +33,5 @@ If you don't log with facebook, you can only use the random movie recommendation
 
 This project is far from finished or polished. At places the code is messy, etc, but the main purpose of this
 repository is to serve as an example of the used technologies put together in a working mobile app.
+
+Some credentials are removed from the repository.
