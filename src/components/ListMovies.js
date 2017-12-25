@@ -1,53 +1,61 @@
-import React, { Component } from 'react';
-import { ListView, View } from 'react-native';
-import { connect } from 'react-redux';
-import ListItem from './ListItem';
-import BigButton from './BigButton';
+import React, { Component } from			'react';
+import { ListView, View, Alert } from		'react-native';
+import { connect } from						'react-redux';
+import { Actions } from						'react-native-router-flux';
 
-import * as mainActions from '../actions/mainActions';
+import ListItem from			'./ListItem';
+import BigButton from			'./BigButton';
+import * as mainActions from	'../actions/mainActions';
 
+class ListMovies extends Component
+{
+	askForConfirm()
+	{
+		let { dispatch }	= this.props;
 
-import { Actions } from 'react-native-router-flux';
+		Alert.alert(
+			'СЪОБЩЕНИЕ',
+			'Премахни всички филми от моя списък?',
+			[
+				{text: 'Отказвам се', onPress: () => {}},
+				{text: 'Да', onPress: () => dispatch(mainActions.startRemoveAllWatchedMovies())},
+			],
+			{ cancelable: true }
+		);
+	}
 
-class ListMovies extends Component {
-  componentWillMount() {
+	renderRow( movieObj )
+	{
+		return <ListItem watchedMovies={movieObj} />;
+	}
 
-  }
+	render()
+	{
+		const ds			= new ListView.DataSource({
+			rowHasChanged: (r1, r2) => r1 !== r2
+		});
 
-  renderRow(movieObj) {
-    return <ListItem watchedMovies={movieObj} />;
-  }
+		const movieObj		= this.props.loggedUser.WatchedMovies ? this.props.loggedUser.WatchedMovies : {};
 
-  render() {
-    let { dispatch } = this.props;
+		this.dataSource		= ds.cloneWithRows( movieObj );
 
-    const ds = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => r1 !== r2,
+		let watchedMovies	= this.props.loggedUser.WatchedMovies;
 
-    });
+		return (
+			<View style={{flex: 1, width: '90%'}}>
+				<ListView enableEmptySections dataSource={this.dataSource} renderRow={this.renderRow}/>
+				<BigButton onPress={ this.askForConfirm.bind( this ) }>Премахни всички от списъка</BigButton>
+			</View>
 
-    const movieObj = this.props.loggedUser.WatchedMovies ? this.props.loggedUser.WatchedMovies : {};
-
-    //const whatchedMoviesObj = Object.assign(...this.props.loggedUser.WatchedMovies.map(d => ({[d[0]]: d[1]})))
-
-    this.dataSource = ds.cloneWithRows(movieObj);
-
-    let watchedMovies = this.props.loggedUser.WatchedMovies;
-
-    return (
-      <View style={{flex: 1, width: '90%'}}>
-        <ListView enableEmptySections dataSource={this.dataSource} renderRow={this.renderRow}/>
-        <BigButton onPress={() => dispatch(mainActions.startRemoveAllWatchedMovies())}>Премахни всички от списъка</BigButton>
-      </View>
-
-    );
-  }
+		);
+	}
 }
 
-
-export default connect((state) => {
-    return {
-      loading: state.Loading,
-      loggedUser: state.LoggedUser
-    };
-  })(ListMovies);
+export default connect( ( state ) =>
+	{
+		return {
+			loading: state.Loading,
+			loggedUser: state.LoggedUser
+		};
+	}
+)( ListMovies );

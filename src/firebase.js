@@ -2,11 +2,12 @@ import firebase from 'firebase';
 
 try {
   const config = {
-    apiKey: '',
-    authDomain: '',
-    databaseURL: '',
-    storageBucket: '',
-    messagingSenderId: ''
+    apiKey: '',
+    authDomain: '',
+    databaseURL: '',
+    projectId: '',
+    storageBucket: '',
+    messagingSenderId: ''
   };
 
   firebase.initializeApp(config);

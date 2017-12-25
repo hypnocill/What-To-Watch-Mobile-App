@@ -5,4 +5,4 @@ export default {
   background: '#E3F2FD',
   buttonBackground: '#2196F3',
   disabledButtonBackground: '#9E9E9E'
-}
+};
