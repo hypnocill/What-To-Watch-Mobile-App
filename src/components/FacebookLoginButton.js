@@ -27,7 +27,7 @@ class FacebookLoginButton extends Component
 						{
 							Alert.alert(
 								'Грешка',
-								'Има проблем при вписването - ' + result.error +
+								'Има проблем при вписването - ' + error +
 								'\nOпитай отново или пиши на hypnocill@gmail.com с описание на проблема.',
 								[
 									{text: 'Добре', onPress: () => {}}

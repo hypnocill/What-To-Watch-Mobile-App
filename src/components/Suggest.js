@@ -18,13 +18,20 @@ class Suggest extends Component
 	{
 		super();
 
-		this.state						= { height: 0, behavior: 'position', keyboardOpen: false };
+		this.state	= { height: 0, behavior: 'position', keyboardOpen: false };
+	}
+
+	componentWillMount()
+	{
 		this.keyboardDidShowListener	= Keyboard.addListener( 'keyboardDidShow', () => this.setState( { keyboardOpen: true } ) );
 		this.keyboardDidHideListener	= Keyboard.addListener( 'keyboardDidHide', () => this.setState( { keyboardOpen: false } ) );
 	}
 
 	componentWillUnmount()
 	{
+		this.keyboardDidShowListener.remove();
+		this.keyboardDidHideListener.remove();
+
 		let { dispatch }	= this.props;
 
 		dispatch( mainActions.clearUserSuggestion() );

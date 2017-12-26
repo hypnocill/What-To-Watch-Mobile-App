@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Provider, connect } from 'react-redux';
+import { GraphRequest, GraphRequestManager } from 'react-native-fbsdk';
 import { createStore, applyMiddleware } from 'redux';
-//import createLogger from 'redux-logger';
+import createLogger from 'redux-logger';
 import firebase, {firebaseRef} from './firebase';
 import ReduxThunk from 'redux-thunk';
 import reducers from './reducers';
@@ -9,46 +10,123 @@ import Router from './Router';
 
 import * as mainActions from './actions/mainActions';
 
-//const logger = createLogger();
+const logger = createLogger();
 
-const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
+const store = createStore(reducers, {}, applyMiddleware(ReduxThunk, logger));
 
-class App extends Component {
-  render() {
-    firebase.auth().onAuthStateChanged((user) => {
+class App extends Component
+{
+	constructor()
+	{
+		super();
+		this.state	= { user: null };
+	}
 
-      let { dispatch } = this.props;
-      if (user) {
-        let {uid, displayName, photoURL} = user;
-        let { email } = user.providerData[0];
+	componentWillMount()
+	{
+		this.unsubscribe	= firebase.auth().onAuthStateChanged( ( userInfo ) =>
+			{
+				if ( userInfo )
+				{
+					this.setState( { user: userInfo } );
+				}
+				else
+				{
+					store.dispatch( mainActions.logout() );
+					this.setState( { user:null } );
+				}
+			}
+		);
+	}
 
-        let id = user.providerData[0].uid;
-          store.dispatch(mainActions.login({uid, id, displayName, email, photoURL}));
+	componentWillUnmount()
+	{
+		this.unsubscribe();
+		this.setState( { user:null } );
+	}
 
-          if(id != ''){
-            store.dispatch(mainActions.sending());
-            firebaseRef.child('users/' + uid).on('value', (snapshot) => {
+	graphRequestCallback( error, response )
+	{
+		let { dispatch }					= this.props;
+		let email							= null;
+		let {uid, displayName, photoURL}	= this.state.user;
+		let id								= this.state.user.providerData[0].uid;
 
-              if(snapshot != null){
-                let watchedMovies = snapshot.val();
+		if ( error )
+		{
+			email	= this.state.user.providerData[0].email || null;
 
-                store.dispatch(mainActions.startStoreWatchedMovies(watchedMovies));
-                store.dispatch(mainActions.sendingSuccess());
-              } else {
-                  store.dispatch(mainActions.sendingSuccess());
-              }
-            });
-          }
-        } else {
-            store.dispatch(mainActions.logout());
-      }
-    });
-    return (
-      <Provider store={store}>
-        <Router />
-      </Provider>
-    );
-  }
+			this.loginUser( uid, id, displayName, email, photoURL );
+		}
+		else
+		{
+			if ( response.email )
+			{
+				email	= response.email;
+				this.state.user.updateEmail( email ).catch( () => {} );
+			}
+			else if ( this.state.user.providerData[0].email )
+			{
+				email	= this.state.user.providerData[0].email;
+			}
+
+			this.loginUser( uid, id, displayName, email, photoURL );
+		}
+	}
+
+	loginUser( uid, id, displayName, email, photoURL )
+	{
+		store.dispatch( mainActions.login( {uid, id, displayName, email, photoURL} ) );
+
+			if( id !== '' )
+			{
+				store.dispatch( mainActions.sending() );
+				firebaseRef.child( 'users/' + uid ).on( 'value', ( snapshot ) =>
+				{
+					if( snapshot !== null )
+					{
+						let watchedMovies	= snapshot.val();
+
+						store.dispatch( mainActions.startStoreWatchedMovies( watchedMovies ) );
+						store.dispatch( mainActions.sendingSuccess() );
+					}
+					else
+					{
+						store.dispatch( mainActions.sendingSuccess() );
+					}
+				});
+			}
+	}
+
+	render()
+	{
+		let { dispatch } = this.props;
+
+		if ( this.state.user !== null )
+		{
+			let req = new GraphRequest( 
+				'/me',
+				{
+					httpMethod: 'GET',
+					version: 'v2.8',
+					parameters: {
+						'fields': {
+							'string' : 'name,email'
+						}
+					}
+				},
+				this.graphRequestCallback.bind( this )
+			);
+
+			new GraphRequestManager().addRequest( req ).start();
+		}
+
+		return (
+			<Provider store={store}>
+				<Router />
+			</Provider>
+		);
+	}
 }
 
 export default App;
