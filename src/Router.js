@@ -6,6 +6,7 @@ import { connect } from								'react-redux';
 import firebase from								'firebase';
 
 import Main from				'./components/Main';
+import AboutUs from				'./components/AboutUs';
 import Suggest from				'./components/Suggest';
 import Lists from				'./components/Lists';
 import ModalScreen from			'./components/ModalScreen';
@@ -94,6 +95,17 @@ class Routing extends Component {
 
 			  />
 			</Scene>
+
+			{/* Tab and it's scenes */}
+			<Scene key="Fourth" title="Fourth" iconName="info" icon={TabIcon} >
+			  <Scene
+				key="aboutus"
+				component={AboutUs}
+				title="За приложението"
+
+			  />
+			</Scene>
+
 		  </Scene>
 
 		  <Scene

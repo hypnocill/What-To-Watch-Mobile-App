@@ -8,7 +8,8 @@ import {
   loginReducer,
   suggestMovieFormReducer,
   watchedMoviesReducer,
-  welcomeMessageReducer
+  welcomeMessageReducer,
+  aboutUsMessageReducer
 } from './Reducers';
 
 export default combineReducers({
@@ -19,5 +20,6 @@ export default combineReducers({
   LoggedUser: loginReducer,
   UserSuggestion: suggestMovieFormReducer,
   WatchedMovie: watchedMoviesReducer,
-  WelcomeMessage: welcomeMessageReducer
+  WelcomeMessage: welcomeMessageReducer,
+  AboutUsMessage: aboutUsMessageReducer
 });

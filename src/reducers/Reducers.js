@@ -202,13 +202,33 @@ export const suggestMovieFormReducer = ( state = suggestMovieInitialState, actio
  * 
  * @return	string
  */
-export const welcomeMessageReducer = ( state = '', action ) =>
+export const welcomeMessageReducer = ( state = { message: '', image: '' }, action ) =>
 {
 	switch( action.type )
 	{
 		case 'WELCOME_MESSAGE':
+			return { message: action.payload.message, image: action.payload.image };
+		default:
+			return state;
+	}
+};
+
+/**
+ * @brief	Reducer managing state for the about us screen message
+ * 
+ * @param	string state
+ * @param	string action
+ * 
+ * @return	string
+ */
+export const aboutUsMessageReducer = ( state = '', action ) =>
+{
+	switch( action.type )
+	{
+		case 'ABOUT_US_MESSAGE':
 			return {message: action.payload};
 		default:
 			return state;
 	}
 };
+

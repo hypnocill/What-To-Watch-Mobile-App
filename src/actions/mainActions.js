@@ -672,12 +672,16 @@ export const startFetchWelcomeMsg	= () =>
 	{
 		firebaseRef.child( 'welcomeMessage/' ).once( 'value' ).then( ( snapshot ) =>
 			{
-				let welcomeMsg	= snapshot.val();
-				dispatch( fetchWelcomeMsg( welcomeMsg ) );
+				let welcomeObj	= snapshot.val();
+
+				dispatch( fetchWelcomeMsg( welcomeObj ) );
 			},
 			() =>
 			{
-				dispatch( fetchWelcomeMsg( '' ) );
+				let welcomeMsg	= {
+					message: '', image: ''
+				};
+				dispatch( fetchWelcomeMsg( welcomeMsg ) );
 			}
 		);
 	};
@@ -685,13 +689,49 @@ export const startFetchWelcomeMsg	= () =>
 
 /**
  * @brief	Terminal Redux action to the welcomeMessageReducer
+ *
+ * @param	object welcomeObj
  * 
  * @return	object
  */
-export const fetchWelcomeMsg		= ( welcomeMsg ) =>
+export const fetchWelcomeMsg		= ( welcomeObj ) =>
 {
 	return {
 		type: 'WELCOME_MESSAGE',
-		payload:	welcomeMsg
+		payload: welcomeObj
+	};
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////About Us Message/////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+export const startFetchAboutUsMsg	= () =>
+{
+	return ( dispatch ) =>
+	{
+		firebaseRef.child( 'aboutUsMessage/' ).once( 'value' ).then( ( snapshot ) =>
+			{
+				let aboutUsMessage	= snapshot.val();
+				dispatch( fetchAboutUsMsg( aboutUsMessage ) );
+			},
+			() =>
+			{
+				dispatch( fetchAboutUsMsg( '' ) );
+			}
+		);
+	};
+};
+
+/**
+ * @brief	Terminal Redux action to the aboutUsMessageReducer
+ * 
+ * @return	object
+ */
+export const fetchAboutUsMsg		= ( aboutUsMessage ) =>
+{
+	return {
+		type: 'ABOUT_US_MESSAGE',
+		payload:	aboutUsMessage
 	};
 };

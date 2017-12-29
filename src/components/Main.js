@@ -122,12 +122,17 @@ class Main extends Component
 		let { welcomeMsg }	= this.props;
 		let message			= welcomeMsg.message;
 
-		if( welcomeMsg )
+		if( welcomeMsg.message )
 		{
 			return (
-				<Text style={{textAlign: 'center', padding: 10}}>
-					{ message }
-				</Text>
+				<View style={{ alignItems: 'center' }}>
+					<Text style={{textAlign: 'center', fontSize: 18, padding: 10}}>
+						{ message }
+					</Text>
+					<Image style={{width: 150, height: 150, borderRadius: 0}} 
+							source={{uri: welcomeMsg.image}}
+					/>
+				</View>
 			);
 		}
 
