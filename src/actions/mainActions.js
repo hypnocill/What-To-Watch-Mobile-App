@@ -642,7 +642,7 @@ export const searchingForMovieFinished		= () =>
  * 
  * @return	object
  */
-export const login	= ( loggedUser ) =>
+export const login		= ( loggedUser ) =>
 {
 	return {
 		type: 'LOGIN',
@@ -655,12 +655,40 @@ export const login	= ( loggedUser ) =>
  * 
  * @return	object
  */
-export const logout	= () =>
+export const logout		= () =>
 {
 	return {
 		type: 'LOGOUT'
 	};
 };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/**
+ * @brief	Terminal Redux action to the helperEmailReducer
+ * 
+ * @return	object
+ */
+export const setEmail	= ( email ) =>
+{
+	return {
+		type: 'SET_USER_EMAIL',
+		payload: email
+	};
+};
+
+/**
+ * @brief	Terminal Redux action to the helperEmailReducer
+ * 
+ * @return	object
+ */
+export const removeEmail	= () =>
+{
+	return {
+		type: 'REMOVE_USER_EMAIL'
+	};
+};
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////Fetch Welcome Message///////////////////////////////////////////////////

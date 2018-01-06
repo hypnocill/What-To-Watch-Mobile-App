@@ -9,7 +9,8 @@ import {
   suggestMovieFormReducer,
   watchedMoviesReducer,
   welcomeMessageReducer,
-  aboutUsMessageReducer
+  aboutUsMessageReducer,
+  helperEmailReducer
 } from './Reducers';
 
 export default combineReducers({
@@ -18,6 +19,7 @@ export default combineReducers({
   AlreadySuggestedMovieKeys: alreadySuggestedMoviesReducer,
   MovieInfo: storeMovieInfoReducer,
   LoggedUser: loginReducer,
+  HelperEmail: helperEmailReducer,
   UserSuggestion: suggestMovieFormReducer,
   WatchedMovie: watchedMoviesReducer,
   WelcomeMessage: welcomeMessageReducer,

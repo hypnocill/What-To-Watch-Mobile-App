@@ -126,7 +126,7 @@ const loginInitialState =
  * @brief	Reducer managing state for the login
  * 
  * @param	object state
- * @param	string action
+ * @param	object|string action
  * 
  * @return	object
  */
@@ -139,15 +139,28 @@ export const loginReducer = ( state = loginInitialState, action ) =>
 		case 'LOGOUT':
 			return loginInitialState;
 		case 'STORE_WATCHED_MOVIES':
-			return {...state, WatchedMovies: action.payload}
+			return {...state, WatchedMovies: action.payload};
 		case 'REMOVE_WATCHED_MOVIE':
-			return {...state}
+			return {...state};
 		case 'REMOVE_ALL_WATCHED_MOVIES':
-			return {...state}
+			return {...state};
 		default:
 			return state;
 	}
 };
+
+export const helperEmailReducer	= ( state = null, action ) =>
+{
+	switch( action.type )
+	{
+		case 'SET_USER_EMAIL':
+			return action.payload;
+		case 'REMOVE_USER_EMAIL':
+			return null;
+		default:
+			return state;
+	}
+}
 
 
 /**

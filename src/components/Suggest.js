@@ -77,12 +77,39 @@ class Suggest extends Component
 		}
 	}
 
+	showEmailTextInput()
+	{
+		let { dispatch, loggedUser }	= this.props;
+		let { email }					= loggedUser.user;
+
+		if ( ! email )
+		{
+			return (
+				<TextInput
+					style={{width: "70%", alignSelf: 'center', borderColor: 'gray', borderWidth: 0, textAlign: 'center'}}
+					placeholder="Твоят и-мейл"
+					autoCorrect = {false}
+					onChangeText={( text ) =>
+						{
+							dispatch( mainActions.setEmail( text ) );
+						}
+					}
+				/>
+			)
+		}
+		else
+		{
+			return null;
+		}
+	}
+
 	showSuccessMessage()
 	{
 		const B = ( props ) => <Text style={{ fontWeight: 'bold' }}>{ props.children }</Text>;
 
 		let { loggedUser }	= this.props;
-		let { email }		= loggedUser.user;
+		let { helperEmail }	= this.props;
+		let email			= loggedUser.user.email || helperEmail;
 
 		if ( email )
 		{
@@ -93,8 +120,9 @@ class Suggest extends Component
 		}
 		return (
 			<Text style={styles.welcome}>Препоръката ти беше изпратена успешно и скоро ще бъде разгледана!
-					Ако бъде одобрена, ще бъде публикувана в приложението.{'\n'}{'\n'}
-					Ако имаш някакви въпроси, можеш да пишеш на hypnocill@gmail.com</Text>
+					Ако бъде одобрена, ще бъде публикувана!.{'\n'}{'\n'}
+					Приложението не е получило твоя е-мейл, поради това няма как да ти изпрати известие{'\n'}
+					Ако имаш някакви въпроси, можеш да пишеш на hypnocill@gmail.com </Text>
 		)
 	}
 
@@ -113,9 +141,11 @@ class Suggest extends Component
 
 	renderScreen()
 	{
-		let { dispatch, loggedUser, UserSuggestion, loading}	= this.props;
-		let { uid, id, displayName, email }						= loggedUser.user;
-		let { title, year, resume, sent }						= UserSuggestion;
+		let { dispatch, loggedUser, helperEmail, UserSuggestion, loading}	= this.props;
+		let { uid, id, displayName }										= loggedUser.user;
+		let { title, year, resume, sent }									= UserSuggestion;
+
+		let email	= loggedUser.user.email || helperEmail;
 
 		if( ( id === '' ) && ( loading === false ) )
 		{
@@ -168,10 +198,12 @@ class Suggest extends Component
 						}
 						onChangeText={( text ) =>
 							{
-								dispatch(mainActions.setResume(text));
+								dispatch( mainActions.setResume( text ) );
 							}
 						}
 					/>
+
+					{ this.showEmailTextInput() }
 
 					<TouchableOpacity
 						onPress={ () =>
@@ -290,6 +322,7 @@ export default connect( ( state ) =>
 		return {
 			loading:		state.Loading,
 			loggedUser:		state.LoggedUser,
+			helperEmail:	state.HelperEmail,
 			UserSuggestion:	state.UserSuggestion
 		};
 	}

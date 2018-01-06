@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Provider, connect } from 'react-redux';
 import { GraphRequest, GraphRequestManager } from 'react-native-fbsdk';
 import { createStore, applyMiddleware } from 'redux';
-import createLogger from 'redux-logger';
+//import createLogger from 'redux-logger';
 import firebase, {firebaseRef} from './firebase';
 import ReduxThunk from 'redux-thunk';
 import reducers from './reducers';
@@ -10,9 +10,9 @@ import Router from './Router';
 
 import * as mainActions from './actions/mainActions';
 
-const logger = createLogger();
+//const logger = createLogger();
 
-const store = createStore(reducers, {}, applyMiddleware(ReduxThunk, logger));
+const store = createStore(reducers, {}, applyMiddleware(ReduxThunk));
 
 class App extends Component
 {
