@@ -1,4 +1,4 @@
-# My Movie Game - React/Redux Web App
+# What To Watch / Какво да гледам - React/Redux Web App
 
 A personal project made for fun and exercise with React and its ecosystem.
 
