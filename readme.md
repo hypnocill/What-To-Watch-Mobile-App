@@ -1,4 +1,4 @@
-# What To Watch / Какво да гледам - React/Redux Web App
+# What To Watch / Какво да гледам - React/Redux Mobile App
 
 An android app that shows you cool movie suggestions!
 
