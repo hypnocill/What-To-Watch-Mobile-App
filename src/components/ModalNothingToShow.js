@@ -19,7 +19,7 @@ class ModalNothingToShow extends Component
 		return(
 			<View style={styles.container}>
 				<Text style={styles.welcome}>
-					Изглежда, че си маркирал всички филми с 'Не показвай повече'.
+					Изглежда, че си маркирал всички филми с 'Не показвай повече' за този жанр и период.{'\n\n'}
 					В случай, че е станала грешка, отиди в менюто{" "}
 					<Icon name={'list'} color={styles.secondaryColor} size={15} /> и виж кои филми си маркирал.
 					Ако пък просто си гледал всички препоръчвани филми досега, защо не отидеш в менюто{" "}

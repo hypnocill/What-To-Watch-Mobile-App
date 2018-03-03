@@ -41,7 +41,6 @@ buck-out/
 \.buckd/
 *.keystore
 
-src/firebase.js
 
 # fastlane
 #

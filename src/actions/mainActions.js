@@ -306,6 +306,26 @@ export const removeWatchedMovie				= () =>
 /////////////////////////////////////////Get Random Suggestions Actions/////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+function useMovieFilters( allMoviesArr, filters )
+{
+	let { genre, years }	= filters;
+
+	allMoviesArr	= allMoviesArr.filter( ( movie ) =>
+		{
+			let yearCondition	= ( ( years[0] < movie.year ) && ( years[1] > movie.year ) ) ? true : false;
+			let genreCondition	= genre ? genre === movie.genre : true;
+
+			if ( yearCondition && genreCondition )
+			{
+				return true;
+			}
+			return false;
+		}
+	);
+
+	return allMoviesArr;
+}
+
 /**
  * @brief	Gets a random movie suggestion
  * 
@@ -316,6 +336,7 @@ export const getRandomSuggestion			= () =>
 	return ( dispatch, getState ) =>
 	{
 		let loggedUser	= getState().LoggedUser;
+		let filters		= getState().Filter;
 
 		dispatch( resetWatchedMovie() );
 		dispatch( clearMovie() );
@@ -328,22 +349,34 @@ export const getRandomSuggestion			= () =>
 
 			for( let prop in moviesObject )
 			{
-				allMoviesArray	= [...allMoviesArray, {key: prop, title: moviesObject[prop].title}];
+				allMoviesArray	= [...allMoviesArray, {key: prop, title: moviesObject[prop].title,
+									year: moviesObject[prop].year, genre: moviesObject[prop].genre}];
 			}
+
+			allMoviesArray	= useMovieFilters( allMoviesArray, filters );
 
 			let movieKey	= smartRandMovieKey( allMoviesArray, getState().AlreadySuggestedMovieKeys, dispatch );
 
 			if( ( loggedUser.user.id !== '' ) && ( loggedUser.WatchedMovies !== null ) )
 			{
-				let watchedMoviesArray	= Object.keys( loggedUser.WatchedMovies );
+				let watchedMoviesArray	= [];
 
-				if( watchedMoviesArray.indexOf( movieKey ) !== -1)
+				for( let prop in loggedUser.WatchedMovies )
+				{
+					watchedMoviesArray	= [...watchedMoviesArray, {key: prop, year: loggedUser.WatchedMovies[prop].year,
+											genre: moviesObject[prop].genre}];
+				}
+
+				watchedMoviesArray	= useMovieFilters( watchedMoviesArray, filters );
+
+				if( watchedMoviesArray.findIndex( ( item ) => item.key === movieKey ) !== -1 )
 				{
 					do
 					{
 						movieKey	= smartRandMovieKey( allMoviesArray, getState().AlreadySuggestedMovieKeys, dispatch );
 					}
-					while( ( watchedMoviesArray.indexOf( movieKey ) !== -1) && ( watchedMoviesArray.length < allMoviesArray.length ) );
+					while( ( watchedMoviesArray.findIndex( ( item ) => item.key === movieKey ) !== -1 )
+							&& ( watchedMoviesArray.length < allMoviesArray.length ) );
 				}
 
 				if( ( watchedMoviesArray.length < allMoviesArray.length ) )
@@ -494,6 +527,19 @@ export const setYear						= ( year ) =>
  * 
  * @return	object
  */
+export const setGenre						= ( genre ) =>
+{
+	return {
+		type: 'SET_GENRE',
+		payload: genre
+	};
+};
+
+/**
+ * @brief	Terminal Redux action to the suggestMovieFormReducer
+ * 
+ * @return	object
+ */
 export const setResume						= ( resume ) =>
 {
 	return {
@@ -531,7 +577,7 @@ export const clearUserSuggestion			= () =>
  * 
  * @return	object
  */
-export const sendSuggestionForApproval		= ( title, year, resume, uid, id, displayName, email ) =>
+export const sendSuggestionForApproval		= ( title, year, genre, resume, uid, id, displayName, email ) =>
 {
 	return ( dispatch ) =>
 	{
@@ -543,6 +589,7 @@ export const sendSuggestionForApproval		= ( title, year, resume, uid, id, displa
 		firebaseRef.child( 'userSubmissions/' ).push({
 		title,
 		year,
+		genre,
 		resume,
 		userCredentials: {
 			uid,
@@ -760,6 +807,36 @@ export const fetchAboutUsMsg		= ( aboutUsMessage ) =>
 {
 	return {
 		type: 'ABOUT_US_MESSAGE',
-		payload:	aboutUsMessage
+		payload: aboutUsMessage
+	};
+};
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////Movie Suggest Filter////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/**
+ * @brief	Terminal Redux action to the randomMovieFilterReducer
+ * 
+ * @return	object
+ */
+export const setGenreFilter		= ( genre ) =>
+{
+	return {
+		type: 'SET_GENRE_FILTER',
+		payload: genre
+	};
+};
+
+/**
+ * @brief	Terminal Redux action to the randomMovieFilterReducer
+ * 
+ * @return	object
+ */
+export const setYearFilter		= ( years ) =>
+{
+	return {
+		type: 'SET_YEAR_FILTER',
+		payload: years
 	};
 };

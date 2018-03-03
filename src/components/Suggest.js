@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, TextInput, View, KeyboardAvoidingView, ScrollView, TouchableOpacity, Keyboard }
+import { StyleSheet, Text, TextInput, View, KeyboardAvoidingView, ScrollView, TouchableOpacity, Keyboard, Picker }
 from							'react-native';
 import { Actions } from			'react-native-router-flux';
 import { LoginButton } from		'react-native-fbsdk';
@@ -9,6 +9,7 @@ import { connect } from			'react-redux';
 import SingOut from				'./common/SingOut';
 import Card from				'./common/Card';
 import Spinner from				'./common/Spinner';
+import config from				'../config/mainConfig';
 import * as mainActions from	'../actions/mainActions';
 import myStyles from			'../styles/AppStyles';
 
@@ -18,7 +19,8 @@ class Suggest extends Component
 	{
 		super();
 
-		this.state	= { height: 0, behavior: 'position', keyboardOpen: false };
+		this.state				= { height: 0, behavior: 'position', keyboardOpen: false };
+		this.placeHolderColor	= '#9E9E9E';
 	}
 
 	componentWillMount()
@@ -39,9 +41,22 @@ class Suggest extends Component
 
 	validation()
 	{
-		let { title, year, resume }	= this.props.UserSuggestion;
+		let { title, year, genre, resume }	= this.props.UserSuggestion;
+		let { loggedUser, helperEmail }		= this.props;
+		let { email }						= loggedUser.user;
+		let emailValidation					= false;
 
-		if( ( title.length > 1 ) && ( year.length == 4 ) && ( year.match(/^[0-9]+$/) !== null ) && ( resume.length > 7 ) )
+		if ( email )
+		{
+			emailValidation	= true;
+		}
+		else if ( helperEmail && helperEmail.indexOf( '@' ) > -1 )
+		{
+			emailValidation	= true;
+		}
+
+		if( ( title.length > 1 ) && ( year.length == 4 ) && ( year.match(/^[0-9]+$/) !== null )
+			&& ( genre !== '' ) && ( resume.length > 7 ) && emailValidation )
 		{
 			return true;
 		}
@@ -77,6 +92,34 @@ class Suggest extends Component
 		}
 	}
 
+	renderPickerItems( item )
+	{
+		let myColor	= ( item.value !== '' ) ? null : this.placeHolderColor;
+
+		return (
+			<Picker.Item label={ item.name } value={ item.value } key={ item.name + item.value } color={ myColor } />
+		);
+	}
+
+	showGenrePicker()
+	{
+		let { genre }		= this.props.UserSuggestion;
+		let { dispatch }	= this.props;
+		let allGenres		= config.genresForSuggest;
+
+		return(
+			<Picker
+				style={{ 'flex': 0.5 }}
+				selectedValue={ genre }
+				onValueChange={ ( itemValue, itemIndex ) => dispatch( mainActions.setGenre( itemValue ) ) }
+				prompt='Избери Жанр'
+			>
+			{ allGenres.map( this.renderPickerItems.bind( this ) ) }
+			</Picker>
+		);
+
+	}
+
 	showEmailTextInput()
 	{
 		let { dispatch, loggedUser }	= this.props;
@@ -88,6 +131,7 @@ class Suggest extends Component
 				<TextInput
 					style={{width: "70%", alignSelf: 'center', borderColor: 'gray', borderWidth: 0, textAlign: 'center'}}
 					placeholder="Твоят и-мейл"
+					placeholderTextColor={ this.placeHolderColor }
 					autoCorrect = {false}
 					onChangeText={( text ) =>
 						{
@@ -143,7 +187,7 @@ class Suggest extends Component
 	{
 		let { dispatch, loggedUser, helperEmail, UserSuggestion, loading}	= this.props;
 		let { uid, id, displayName }										= loggedUser.user;
-		let { title, year, resume, sent }									= UserSuggestion;
+		let { title, year, genre, resume, sent }							= UserSuggestion;
 
 		let email	= loggedUser.user.email || helperEmail;
 
@@ -174,16 +218,21 @@ class Suggest extends Component
 						}
 						onBlur={ () => { dispatch( mainActions.startIsMovieAlreadySuggested() ); } }
 					/>
-					<TextInput
-						style={{width: "25%", alignSelf: 'center', borderColor: 'gray', borderWidth: 0, textAlign: 'center'}}
-						placeholder="Година"
-						autoCorrect = {false}
-						onChangeText={( text ) =>
-							{
-								dispatch( mainActions.setYear( text ) );
+
+					<View style={{ 'flex': 1, width: "80%", 'flexDirection': 'row', alignSelf: 'center' }} >
+						<TextInput
+							style={{'flex': 0.3, borderColor: 'gray', borderWidth: 0, textAlign: 'center', 'marginRight': 25, 'marginLeft': 19}}
+							placeholder="Година"
+							autoCorrect = {false}
+							onChangeText={( text ) =>
+								{
+									dispatch( mainActions.setYear( text ) );
+								}
 							}
-						}
-					/>
+						/>
+
+						{ this.showGenrePicker() }
+					</View>
 
 					<TextInput
 						style={{width: "90%", marginBottom: 10, marginTop: 10, alignSelf: 'center', borderColor: 'gray',
@@ -208,7 +257,7 @@ class Suggest extends Component
 					<TouchableOpacity
 						onPress={ () =>
 							{
-								dispatch( mainActions.sendSuggestionForApproval( title, year, resume, uid, id, displayName, email ) );
+								dispatch( mainActions.sendSuggestionForApproval( title, year, genre, resume, uid, id, displayName, email ) );
 								this.setState( { height: 0 } );
 							}
 						}

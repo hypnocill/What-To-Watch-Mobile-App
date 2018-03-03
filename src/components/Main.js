@@ -14,7 +14,7 @@ import firebase, {firebaseRef, FBprovider} from	'../firebase';
 import * as mainActions from	'../actions/mainActions';
 import myStyles from			'../styles/AppStyles';
 import SingOut from				'./common/SingOut';
-import Button from				'./BigButton';
+import FilterPicker from		'./FilterPicker';
 import BigButton from			'./BigButton';
 import Spinner from				'./common/Spinner';
 import Card from				'./common/Card';
@@ -58,7 +58,7 @@ class Main extends Component
 		else if( movieInfo )
 		{
 			return (
-				<View>
+				<View style={{ 'marginBottom': 10 }} >
 					<Card>
 						<CardSection style={{width: '100%', flexDirection: 'column', justifyContent: 'center',
 											alignItems: 'center', borderBottomWidth: 0 }}
@@ -69,6 +69,7 @@ class Main extends Component
 								<Image style={{width: 120, height: 180}} source={{uri: movieInfo.posterURL}} /> : 
 								<Spinner size={30} color={myStyles.primaryColor}/>
 							}
+							<Text style={{fontSize: 14, fontWeight: '300'}}>{movieInfo.movieInfo.genre}</Text>
 						</CardSection>
 						<CardSection style={{flexDirection: 'column'}}>
 							<Text style={{margin: 15}}>{movieInfo.movieInfo.resume}</Text>
@@ -88,6 +89,7 @@ class Main extends Component
 						<Text style={{fontSize: 10}}>This product uses the TMDb API but is not endorsed or certified by TMDb. </Text>
 					</View>
 					<BigButton onPress={this.getSuggestion.bind( this )}>Препоръчай друг!</BigButton>
+					{ this.renderFilterPicker() }
 				</View>
 			);
 		}
@@ -96,10 +98,18 @@ class Main extends Component
 			return (
 				<View style={{alignSelf: 'stretch'}}>
 					{ this.renderMainButton() }
+					{ this.renderFilterPicker() }
 					{ this.renderWelcomeMessage() }
 				</View>
 			);
 		}
+	}
+
+	renderFilterPicker()
+	{
+		return (
+			<FilterPicker />
+		);
 	}
 
 	renderMainButton()
@@ -108,7 +118,7 @@ class Main extends Component
 
 		return (
 			<BigButton
-				height={100 }
+				height={ 100 }
 				onPress={this.getSuggestion.bind( this )}
 				disabled={( ( loggedUser.user.id !== '' ) && ( loggedUser.WatchedMovies === false ) ) ? true : false}
 				style={{alignSelf: 'stretch'}}>

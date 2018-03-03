@@ -20,6 +20,29 @@ export const getRandomMovieKeyReducer		= ( state = null, action ) =>
 };
 
 /**
+ * @brief	Reducer managing state for the filter
+ * 
+ * @param	object state
+ * @param	string action
+ * 
+ * @return	object
+ */
+export const randomMovieFilterReducer = ( state = { genre: null, years: [0, 2025] }, action ) =>
+{
+	switch( action.type )
+	{
+		case 'SET_GENRE_FILTER':
+			return {...state, genre: action.payload};
+		case 'SET_YEAR_FILTER':
+			return {...state, years: action.payload};
+		case 'REMOVE_FILTERS':
+			return { genre: null, years: [0, 2025] };
+		default:
+			return state;
+	}
+};
+
+/**
  * @brief	Reducer managing state for the already suggested movies
  * 
  * @param	array state
@@ -170,6 +193,7 @@ const suggestMovieInitialState =
 {
 	title: '',
 	year: '',
+	genre: '',
 	resume: '',
 	sent: false,
 	movieAlreadySuggested: false
@@ -190,6 +214,8 @@ export const suggestMovieFormReducer = ( state = suggestMovieInitialState, actio
 			return {...state, title: action.payload};
 		case 'SET_YEAR':
 			return {...state, year: action.payload};
+		case 'SET_GENRE':
+			return {...state, genre: action.payload};
 		case 'SET_RESUME':
 			return {...state, resume: action.payload};
 		case 'SET_SENT':

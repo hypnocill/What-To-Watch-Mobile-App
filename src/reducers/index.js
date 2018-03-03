@@ -3,6 +3,7 @@ import { combineReducers } from 'redux';
 import {
   sendingReducer,
   getRandomMovieKeyReducer,
+  randomMovieFilterReducer,
   alreadySuggestedMoviesReducer,
   storeMovieInfoReducer,
   loginReducer,
@@ -15,6 +16,7 @@ import {
 
 export default combineReducers({
   Loading: sendingReducer,
+  Filter: randomMovieFilterReducer,
   MovieKey: getRandomMovieKeyReducer,
   AlreadySuggestedMovieKeys: alreadySuggestedMoviesReducer,
   MovieInfo: storeMovieInfoReducer,
