@@ -2,7 +2,7 @@
  * @brief	Reducer managing state for random movie key
  * 
  * @param	null|object state
- * @param	string action
+ * @param	object action
  * 
  * @return	null|object
  */
@@ -23,7 +23,7 @@ export const getRandomMovieKeyReducer		= ( state = null, action ) =>
  * @brief	Reducer managing state for the filter
  * 
  * @param	object state
- * @param	string action
+ * @param	object action
  * 
  * @return	object
  */
@@ -46,7 +46,7 @@ export const randomMovieFilterReducer = ( state = { genre: null, years: [0, 2025
  * @brief	Reducer managing state for the already suggested movies
  * 
  * @param	array state
- * @param	string action
+ * @param	object action
  * 
  * @return	array
  */
@@ -67,7 +67,7 @@ export const alreadySuggestedMoviesReducer	= ( state = [], action ) =>
  * @brief	Reducer managing state for the sending and sending success (loading)
  * 
  * @param	boolean state
- * @param	string action
+ * @param	object action
  * 
  * @return	array
  */
@@ -88,7 +88,7 @@ export const sendingReducer				= ( state = false, action ) =>
  * @brief	Reducer managing state for the button 'не показвай повече'
  * 
  * @param	string|boolean state
- * @param	string action
+ * @param	object action
  * 
  * @return	array
  */
@@ -111,7 +111,7 @@ export const watchedMoviesReducer		= ( state = false, action ) =>
  * @brief	Reducer managing state for storing the suggested movie info
  * 
  * @param	null|object state
- * @param	string action
+ * @param	object action
  * 
  * @return	null|object
  */
@@ -149,7 +149,7 @@ const loginInitialState =
  * @brief	Reducer managing state for the login
  * 
  * @param	object state
- * @param	object|string action
+ * @param	object|object action
  * 
  * @return	object
  */
@@ -203,7 +203,7 @@ const suggestMovieInitialState =
  * @brief	Reducer managing state for the suggest a movie form
  * 
  * @param	object state
- * @param	string action
+ * @param	object action
  * 
  * @return	object
  */
@@ -237,7 +237,7 @@ export const suggestMovieFormReducer = ( state = suggestMovieInitialState, actio
  * @brief	Reducer managing state for the main screen welcome message
  * 
  * @param	string state
- * @param	string action
+ * @param	object action
  * 
  * @return	string
  */
@@ -256,7 +256,7 @@ export const welcomeMessageReducer = ( state = { message: '', image: '' }, actio
  * @brief	Reducer managing state for the about us screen message
  * 
  * @param	string state
- * @param	string action
+ * @param	object action
  * 
  * @return	string
  */

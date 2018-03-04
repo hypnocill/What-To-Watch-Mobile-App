@@ -306,6 +306,14 @@ export const removeWatchedMovie				= () =>
 /////////////////////////////////////////Get Random Suggestions Actions/////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+/**
+ * @brief	Takes an array containing all movies and filters out those that don't match the current search filters
+ * 
+ * @param	array allMoviesArr
+ * @param	object filters
+ * 
+ * @return	array
+ */
 function useMovieFilters( allMoviesArr, filters )
 {
 	let { genre, years }	= filters;
@@ -410,6 +418,13 @@ export const getRandomSuggestion			= () =>
 	};
 };
 
+/**
+ * @brief	Gets the info for a movie and dispatches the appropriate actions on success
+ * 
+ * @param	string movieKey
+ * 
+ * @return	void
+ */
 export const getMovieInfo					= ( movieKey ) =>
 {
 	return ( dispatch ) =>
@@ -498,6 +513,8 @@ export const clearAlreadySuggestedMovieKeys	= () =>
 
 /**
  * @brief	Terminal Redux action to the suggestMovieFormReducer
+ *
+ * @param	string title
  * 
  * @return	object
  */
@@ -511,6 +528,8 @@ export const setTitle						= ( title ) =>
 
 /**
  * @brief	Terminal Redux action to the suggestMovieFormReducer
+ *
+ * @param	int year
  * 
  * @return	object
  */
@@ -524,6 +543,8 @@ export const setYear						= ( year ) =>
 
 /**
  * @brief	Terminal Redux action to the suggestMovieFormReducer
+ *
+ * @param	string genre
  * 
  * @return	object
  */
@@ -537,6 +558,8 @@ export const setGenre						= ( genre ) =>
 
 /**
  * @brief	Terminal Redux action to the suggestMovieFormReducer
+ *
+ * @param	string resume
  * 
  * @return	object
  */
@@ -575,7 +598,16 @@ export const clearUserSuggestion			= () =>
 /**
  * @brief	Terminal Redux action to the suggestMovieFormReducer
  * 
- * @return	object
+ * @param	string title
+ * @param	int year
+ * @param	string genre
+ * @param	string resume
+ * @param	string uuid
+ * @param	string id
+ * @param	string displayName
+ * @param	string email
+ * 
+ * @return	void
  */
 export const sendSuggestionForApproval		= ( title, year, genre, resume, uid, id, displayName, email ) =>
 {
@@ -645,6 +677,8 @@ export const startIsMovieAlreadySuggested	= () =>
 
 /**
  * @brief	Terminal Redux action to the suggestMovieFormReducer
+ *
+ * @param	object movie
  * 
  * @return	object
  */
@@ -686,6 +720,8 @@ export const searchingForMovieFinished		= () =>
 
 /**
  * @brief	Terminal Redux action to the loginReducer
+ *
+ * @param	object loggedUser
  * 
  * @return	object
  */
@@ -713,6 +749,8 @@ export const logout		= () =>
 
 /**
  * @brief	Terminal Redux action to the helperEmailReducer
+ *
+ * @param	string email
  * 
  * @return	object
  */
@@ -741,6 +779,11 @@ export const removeEmail	= () =>
 ////////////////////////////////////////////////Fetch Welcome Message///////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+/**
+ * @brief	Starts the fetching of the welcome message
+ * 
+ * @return	void
+ */
 export const startFetchWelcomeMsg	= () =>
 {
 	return ( dispatch ) =>
@@ -781,6 +824,11 @@ export const fetchWelcomeMsg		= ( welcomeObj ) =>
 ///////////////////////////////////////////////////About Us Message/////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+/**
+ * @brief	Starts the fetching of the About Us message
+ * 
+ * @return	void
+ */
 export const startFetchAboutUsMsg	= () =>
 {
 	return ( dispatch ) =>
@@ -800,6 +848,8 @@ export const startFetchAboutUsMsg	= () =>
 
 /**
  * @brief	Terminal Redux action to the aboutUsMessageReducer
+ *
+ * @Param	object aboutUsMessage
  * 
  * @return	object
  */
@@ -817,6 +867,8 @@ export const fetchAboutUsMsg		= ( aboutUsMessage ) =>
 
 /**
  * @brief	Terminal Redux action to the randomMovieFilterReducer
+ *
+ * @param	string genre
  * 
  * @return	object
  */
@@ -830,6 +882,8 @@ export const setGenreFilter		= ( genre ) =>
 
 /**
  * @brief	Terminal Redux action to the randomMovieFilterReducer
+ *
+ * @param	object years
  * 
  * @return	object
  */
