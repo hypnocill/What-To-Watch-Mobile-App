@@ -1,11 +1,11 @@
-import React, { Component } from							'react';
-import { Text, TouchableOpacity, Alert, Image, View } from	'react-native';
-import { LoginManager, LoginButton, AccessToken } from		'react-native-fbsdk';
-import { connect } from										'react-redux';
+import React, { Component }								from 'react';
+import { Text, TouchableOpacity, Alert, Image, View }	from 'react-native';
+import { LoginManager, LoginButton, AccessToken }		from 'react-native-fbsdk';
+import { connect }										from 'react-redux';
 
-import firebase,  {firebaseRef, FBprovider} from	'../../firebase';
-import myStyles from								'../../styles/AppStyles';
-import Spinner from									'./Spinner';
+import firebase,  {firebaseRef, FBprovider}				from '../../firebase';
+import myStyles											from '../../styles/AppStyles';
+import Spinner											from './Spinner';
 
 class SingOut extends Component
 {

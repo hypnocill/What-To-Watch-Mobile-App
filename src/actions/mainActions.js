@@ -1,6 +1,6 @@
-import firebase, {firebaseRef, FBprovider} from	'../firebase';
-import axios from								'axios';
-import { Actions } from							'react-native-router-flux';
+import firebase, {firebaseRef, FBprovider}	from '../firebase';
+import axios								from 'axios';
+import { Actions }							from 'react-native-router-flux';
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////Helper Functions///////////////////////////////////////////////////////

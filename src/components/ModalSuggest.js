@@ -1,11 +1,11 @@
-import React, { Component } from									'react';
-import { StyleSheet, Text, View, Button, TouchableOpacity } from	'react-native';
-import { Actions } from												'react-native-router-flux';
-import { connect } from												'react-redux';
+import React, { Component }									from 'react';
+import { StyleSheet, Text, View, Button, TouchableOpacity }	from 'react-native';
+import { Actions }											from 'react-native-router-flux';
+import { connect }											from 'react-redux';
 
-import FacebookLoginButton from './FacebookLoginButton';
-import ModalButton from			'./common/ModalButton';
-import myStyles from			'../styles/AppStyles';
+import FacebookLoginButton									from './FacebookLoginButton';
+import ModalButton											from './common/ModalButton';
+import myStyles												from '../styles/AppStyles';
 
 class ModalSuggest extends Component
 {

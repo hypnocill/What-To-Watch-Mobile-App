@@ -1,13 +1,13 @@
-import React, { Component } from									'react';
-import { StyleSheet, Text, View, Button, TouchableOpacity } from	'react-native';
-import { LoginManager, LoginButton, AccessToken } from				'react-native-fbsdk';
-import { Actions } from												'react-native-router-flux';
-import Icon from													'react-native-vector-icons/FontAwesome';
+import React, { Component }									from 'react';
+import { StyleSheet, Text, View, Button, TouchableOpacity }	from 'react-native';
+import { LoginManager, LoginButton, AccessToken }			from 'react-native-fbsdk';
+import { Actions }											from 'react-native-router-flux';
+import Icon													from 'react-native-vector-icons/FontAwesome';
 
-import firebase, { FBprovider } from '../firebase';
+import firebase, { FBprovider }								from '../firebase';
 
-import ModalButton from	'./common/ModalButton';
-import myStyles from	'../styles/AppStyles';
+import ModalButton											from './common/ModalButton';
+import myStyles												from '../styles/AppStyles';
 
 class ModalNothingToShow extends Component
 {

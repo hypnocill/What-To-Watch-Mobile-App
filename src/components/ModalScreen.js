@@ -1,10 +1,10 @@
-import React, { Component } from									'react';
-import { StyleSheet, Text, View, Button, TouchableOpacity } from	'react-native';
-import { Actions } from												'react-native-router-flux';
+import React, { Component }									from 'react';
+import { StyleSheet, Text, View, Button, TouchableOpacity }	from 'react-native';
+import { Actions }											from 'react-native-router-flux';
 
-import FacebookLoginButton from './FacebookLoginButton';
-import myStyles from			'../styles/AppStyles';
-import ModalButton from			'./common/ModalButton';
+import FacebookLoginButton									from './FacebookLoginButton';
+import myStyles												from '../styles/AppStyles';
+import ModalButton											from './common/ModalButton';
 
 class Modal extends Component
 {

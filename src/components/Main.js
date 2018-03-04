@@ -1,24 +1,25 @@
-import React, { Component } from	'react';
-import { connect } from				'react-redux';
-import { Actions } from				'react-native-router-flux';
-import Icon from					'react-native-vector-icons/FontAwesome';
+import React, { Component }					from 'react';
+import { connect }							from 'react-redux';
+import { Actions }							from 'react-native-router-flux';
+import Icon									from 'react-native-vector-icons/FontAwesome';
 import
 {
 	StyleSheet, Text, View, ScrollView,
-	Image, UIManager, LayoutAnimation, TouchableOpacity
-} from								'react-native';
+	Image, UIManager, LayoutAnimation,
+	TouchableOpacity
+}											from 'react-native';
 
-import axios from								'axios';
-import firebase, {firebaseRef, FBprovider} from	'../firebase';
+import axios								from 'axios';
+import firebase, {firebaseRef, FBprovider}	from '../firebase';
 
-import * as mainActions from	'../actions/mainActions';
-import myStyles from			'../styles/AppStyles';
-import SingOut from				'./common/SingOut';
-import FilterPicker from		'./FilterPicker';
-import BigButton from			'./BigButton';
-import Spinner from				'./common/Spinner';
-import Card from				'./common/Card';
-import CardSection from			'./common/CardSection';
+import * as mainActions						from '../actions/mainActions';
+import myStyles								from '../styles/AppStyles';
+import SingOut								from './common/SingOut';
+import FilterPicker							from './FilterPicker';
+import BigButton							from './BigButton';
+import Spinner								from './common/Spinner';
+import Card									from './common/Card';
+import CardSection							from './common/CardSection';
 
 class Main extends Component
 {

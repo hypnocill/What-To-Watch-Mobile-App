@@ -1,10 +1,10 @@
-import React, { Component } from	'react';
-import { View, Picker } from		'react-native';
-import { connect } from				'react-redux';
+import React, { Component }	from 'react';
+import { View, Picker }		from 'react-native';
+import { connect }			from 'react-redux';
 
-import config from				'../config/mainConfig';
-import myStyles from			'../styles/AppStyles';
-import * as mainActions from	'../actions/mainActions';
+import config				from '../config/mainConfig';
+import myStyles				from '../styles/AppStyles';
+import * as mainActions		from '../actions/mainActions';
 
 class FilterPicker extends Component
 {

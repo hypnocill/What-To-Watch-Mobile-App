@@ -1,10 +1,10 @@
-import React, { Component } from														'react';
-import { Text, TouchableWithoutFeedback, TouchableOpacity, View, LayoutAnimation } from	'react-native';
-import { connect } from																	'react-redux';
-import Icon from																		'react-native-vector-icons/FontAwesome';
+import React, { Component }															from 'react';
+import { Text, TouchableWithoutFeedback, TouchableOpacity, View, LayoutAnimation }	from 'react-native';
+import { connect }																	from 'react-redux';
+import Icon																			from 'react-native-vector-icons/FontAwesome';
 
-import CardSection from			'./common/CardSection';
-import * as mainActions from	'../actions/mainActions';
+import CardSection																	from './common/CardSection';
+import * as mainActions																from '../actions/mainActions';
 
 class ListItem extends Component {
 

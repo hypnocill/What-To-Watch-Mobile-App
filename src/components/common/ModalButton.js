@@ -1,7 +1,7 @@
-import React from						'react';
-import { Text, TouchableOpacity } from	'react-native';
+import React						from 'react';
+import { Text, TouchableOpacity }	from 'react-native';
 
-import myStyles from '../../styles/AppStyles';
+import myStyles						from '../../styles/AppStyles';
 
 const ModalButton = ({ onPress, children }) =>
 {

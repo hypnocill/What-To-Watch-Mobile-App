@@ -1,9 +1,9 @@
-import React, { Component } from										'react';
-import { Alert, StyleSheet, Text, View, Button, TouchableOpacity } from	'react-native';
-import { LoginManager, LoginButton, AccessToken } from					'react-native-fbsdk';
-import { Actions } from													'react-native-router-flux';
+import React, { Component } 										from 'react';
+import { Alert, StyleSheet, Text, View, Button, TouchableOpacity }	from 'react-native';
+import { LoginManager, LoginButton, AccessToken } 					from 'react-native-fbsdk';
+import { Actions } 													from 'react-native-router-flux';
 
-import firebase, { FBprovider } from	'../firebase';
+import firebase, { FBprovider }										from '../firebase';
 
 class FacebookLoginButton extends Component
 {

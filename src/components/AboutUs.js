@@ -1,19 +1,19 @@
-import React, { Component } from	'react';
-import { connect } from				'react-redux';
-import { Actions } from				'react-native-router-flux';
+import React, { Component }					from 'react';
+import { connect }							from 'react-redux';
+import { Actions }							from 'react-native-router-flux';
 import
 {
 	StyleSheet, Text, View, ScrollView,
 	Image, TouchableOpacity
-} from								'react-native';
+}											from 'react-native';
 
-import axios from								'axios';
-import firebase, {firebaseRef, FBprovider} from	'../firebase';
+import axios								from 'axios';
+import firebase, {firebaseRef, FBprovider}	from 'firebase';
 
-import * as mainActions from	'../actions/mainActions';
-import myStyles from			'../styles/AppStyles';
-import SingOut from				'./common/SingOut';
-import Spinner from				'./common/Spinner';
+import * as mainActions						from '../actions/mainActions';
+import myStyles								from '../styles/AppStyles';
+import SingOut								from './common/SingOut';
+import Spinner								from './common/Spinner';
 
 class AboutUs extends Component
 {

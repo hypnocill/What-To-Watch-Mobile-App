@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux';
+import { combineReducers }		from 'redux';
 
 import {
   sendingReducer,
@@ -12,7 +12,7 @@ import {
   welcomeMessageReducer,
   aboutUsMessageReducer,
   helperEmailReducer
-} from './Reducers';
+}								from './Reducers';
 
 export default combineReducers({
   Loading: sendingReducer,

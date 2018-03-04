@@ -1,11 +1,11 @@
-import React, { Component } from			'react';
-import { ListView, View, Alert } from		'react-native';
-import { connect } from						'react-redux';
-import { Actions } from						'react-native-router-flux';
+import React, { Component }			from 'react';
+import { ListView, View, Alert }	from 'react-native';
+import { connect }					from 'react-redux';
+import { Actions }					from 'react-native-router-flux';
 
-import ListItem from			'./ListItem';
-import BigButton from			'./BigButton';
-import * as mainActions from	'../actions/mainActions';
+import ListItem						from './ListItem';
+import BigButton					from './BigButton';
+import * as mainActions				from '../actions/mainActions';
 
 class ListMovies extends Component
 {

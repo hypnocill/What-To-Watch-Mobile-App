@@ -1,14 +1,14 @@
-import React, { Component } from							'react';
-import { StyleSheet, Text, View, TouchableOpacity } from	'react-native';
-import { connect } from										'react-redux';
-import { Actions } from										'react-native-router-flux';
-import Icon from											'react-native-vector-icons/FontAwesome';
+import React, { Component }							from 'react';
+import { StyleSheet, Text, View, TouchableOpacity }	from 'react-native';
+import { connect }									from 'react-redux';
+import { Actions }									from 'react-native-router-flux';
+import Icon											from 'react-native-vector-icons/FontAwesome';
 
-import Spinner from		'./common/Spinner';
-import SingOut from		'./common/SingOut';
-import myStyles from	'../styles/AppStyles';
-import BigButton from	'./BigButton';
-import ListMovies from	'./ListMovies';
+import Spinner										from './common/Spinner';
+import SingOut										from './common/SingOut';
+import myStyles										from '../styles/AppStyles';
+import BigButton									from './BigButton';
+import ListMovies									from './ListMovies';
 
 class Lists extends Component
 {

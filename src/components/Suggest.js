@@ -1,17 +1,22 @@
-import React, { Component } from 'react';
-import { StyleSheet, Text, TextInput, View, KeyboardAvoidingView, ScrollView, TouchableOpacity, Keyboard, Picker }
-from							'react-native';
-import { Actions } from			'react-native-router-flux';
-import { LoginButton } from		'react-native-fbsdk';
-import Icon from				'react-native-vector-icons/FontAwesome';
-import { connect } from			'react-redux';
+import React, { Component }		from 'react';
+import
+{
+	StyleSheet, Text, TextInput, View,
+	KeyboardAvoidingView, ScrollView,
+	TouchableOpacity, Keyboard, Picker
+}
+								from 'react-native';
+import { Actions }				from 'react-native-router-flux';
+import { LoginButton }			from 'react-native-fbsdk';
+import Icon						from 'react-native-vector-icons/FontAwesome';
+import { connect }				from 'react-redux';
 
-import SingOut from				'./common/SingOut';
-import Card from				'./common/Card';
-import Spinner from				'./common/Spinner';
-import config from				'../config/mainConfig';
-import * as mainActions from	'../actions/mainActions';
-import myStyles from			'../styles/AppStyles';
+import SingOut					from './common/SingOut';
+import Card						from './common/Card';
+import Spinner					from './common/Spinner';
+import config					from '../config/mainConfig';
+import * as mainActions			from '../actions/mainActions';
+import myStyles					from '../styles/AppStyles';
 
 class Suggest extends Component
 {
