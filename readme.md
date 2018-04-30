@@ -32,6 +32,6 @@ If you don't login with facebook, you can only use the random movie recommendati
 
 This repository represents an older version of the app.
 
-The project won't work with simply npm install. It's for viewing purposes mostly.
+The project won't work with simply npm install. It's for viewing purposes mostly. To actually test the project - download the app from the given 'DEMO' link above.
 
 Some credentials are removed from the repository.
